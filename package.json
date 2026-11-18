@@ -1,0 +1,21 @@
+{
+  "name": "crud_productos",
+  "version": "1.0.0",
+  "description": "Proyecto de práctica para desarrollar operaciones CRUD.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wilfre200/CRUD_Productos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Wilfre200/CRUD_Productos/issues"
+  },
+  "homepage": "https://github.com/Wilfre200/CRUD_Productos#readme"
+}
