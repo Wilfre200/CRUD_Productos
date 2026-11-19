@@ -1,21 +1,24 @@
 {
-  "name": "crud_productos",
-  "version": "1.0.0",
-  "description": "Proyecto de práctica para desarrollar operaciones CRUD.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Wilfre200/CRUD_Productos.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Wilfre200/CRUD_Productos/issues"
-  },
-  "homepage": "https://github.com/Wilfre200/CRUD_Productos#readme"
+    "name": "crud_productos",
+    "version": "1.0.0",
+    "description": "Proyecto de práctica para desarrollar operaciones CRUD.",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Wilfre200/CRUD_Productos.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "bugs": {
+        "url": "https://github.com/Wilfre200/CRUD_Productos/issues"
+    },
+    "homepage": "https://github.com/Wilfre200/CRUD_Productos#readme",
+    "dependencies": {
+        "express": "^5.3.0"
+    }
 }
