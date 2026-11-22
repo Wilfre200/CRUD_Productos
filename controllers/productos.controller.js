@@ -48,3 +48,28 @@ export const createProducto = (req, res) => {
         producto: nuevoProducto
     });
 };
+
+// Update a product by id
+export const updateProducto = (req, res) => {
+    const { id } = req.params;
+    const { sku, nombre, categoria, precio, stock, activo, especificaciones } = req.body;
+
+    const producto = productos.find((p) => p.id === parseInt(id));
+
+    if (!producto) {
+        return res.status(404).json({ message: "Producto no encontrado" });
+    }
+
+    producto.sku = sku || producto.sku;
+    producto.nombre = nombre || producto.nombre;
+    producto.categoria = categoria || producto.categoria;
+    producto.precio = precio || producto.precio;
+    producto.stock = stock || producto.stock;
+    producto.activo = activo !== undefined ? activo : producto.activo;
+    producto.especificaciones = especificaciones || producto.especificaciones;
+
+    res.json({
+        mensaje: "Producto actualizado correctamente",
+        producto
+    });
+};
