@@ -73,3 +73,17 @@ export const updateProducto = (req, res) => {
         producto
     });
 };
+
+// Delete a product by id
+export const deleteProducto = (req, res) => {
+    const { id } = req.params;
+    const index = productos.findIndex((p) => p.id === parseInt(id));
+
+    if (index === -1) {
+        return res.status(404).json({ message: "Producto no encontrado" });
+    }
+
+    productos.splice(index, 1);
+
+    res.json({ message: "Producto eliminado correctamente" });
+};
