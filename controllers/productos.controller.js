@@ -87,3 +87,24 @@ export const deleteProducto = (req, res) => {
 
     res.json({ message: "Producto eliminado correctamente" });
 };
+
+// PATCH
+export const patchProducto = (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const producto = productos.find(producto => producto.id === id);
+
+    if (!producto) {
+        return res.status(404).json({ message: "Producto no encontrado" })
+    }
+
+    const datosActualizados = req.body;
+
+    Object.assign(producto, datosActualizados);
+
+    res.status(200).json({
+        message: "Producto actualizado correctamente",
+        producto
+
+    });
+}
