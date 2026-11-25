@@ -30,6 +30,36 @@ export const createProducto = (req, res) => {
         especificaciones
     } = req.body;
 
+    // validar SKU
+    if (!sku || sku.trim() === "") {
+        return res.status(400).json({ message: "El SKU es obligatorio" });
+    }
+
+    // validar nombre
+    if (!nombre || nombre.trim() === "") {
+        return res.status(400).json({ message: "El nombre es obligatorio" });
+    }
+
+    // validar categoria
+    if (!categoria || categoria.trim() === "") {
+        return res.status(400).json({ message: "La categoría es obligatoria" });
+    }
+
+    // validar precio
+    if (typeof precio !== "number" || !Number.isFinite(precio) || precio <= 0) {
+        return res.status(400).json({ message: "El precio es obligatorio y debe ser un número positivo" });
+    }
+
+    // validar stock
+    if (!Number.isInteger(stock) || stock < 0) {
+        return res.status(400).json({ message: "El stock es obligatorio y debe ser un número entero no negativo" });
+    }
+
+    // validar activo
+    if (typeof activo !== "boolean") {
+        return res.status(400).json({ message: "El campo 'activo' es obligatorio y debe ser un valor booleano" });
+    }
+
     const nuevoProducto = {
         id: productos.length + 1,
         sku,
