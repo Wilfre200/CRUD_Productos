@@ -60,6 +60,11 @@ export const createProducto = (req, res) => {
         return res.status(400).json({ message: "El campo 'activo' es obligatorio y debe ser un valor booleano" });
     }
 
+    // validar especificaciones (opcional)
+    if (especificaciones !== undefined && (especificaciones === null || typeof especificaciones !== "object" || Array.isArray(especificaciones))) {
+        return res.status(400).json({ message: "Las especificaciones deben ser un objeto válido" });
+    }
+
     const existeSKU = productos.some((producto) => producto.sku === sku);
     if (existeSKU) {
         return res.status(409).json({ message: "El SKU ya existe" });
@@ -96,35 +101,39 @@ export const updateProducto = (req, res) => {
     }
 
     // validar SKU
-    if (typeof sku !== "string" || sku.trim() === "") {
-        return res.status(400).json({ message: "El SKU es obligatorio" });
+    if (sku !== undefined && (typeof sku !== "string" || sku.trim() === "")) {
+        return res.status(400).json({ message: "El SKU debe ser un texto no vacio" });
     }
 
     // validar nombre
-    if (typeof nombre !== "string" || nombre.trim() === "") {
-        return res.status(400).json({ message: "El nombre es obligatorio" });
+    if (nombre !== undefined && (typeof nombre !== "string" || nombre.trim() === "")) {
+        return res.status(400).json({ message: "El nombre debe ser un texto no vacio" });
     }
 
     // validar categoria
-    if (typeof categoria !== "string" || categoria.trim() === "") {
-        return res.status(400).json({ message: "La categoría es obligatoria" });
+    if (categoria !== undefined && (typeof categoria !== "string" || categoria.trim() === "")) {
+        return res.status(400).json({ message: "La categoría debe ser un texto no vacio" });
     }
 
     // validar precio
-    if (typeof precio !== "number" || !Number.isFinite(precio) || precio <= 0) {
+    if (precio !== undefined && (typeof precio !== "number" || !Number.isFinite(precio) || precio <= 0)) {
         return res.status(400).json({ message: "El precio es obligatorio y debe ser un número positivo" });
     }
 
     // validar stock
-    if (typeof stock !== "number" || !Number.isInteger(stock) || stock < 0) {
+    if (stock !== undefined && (typeof stock !== "number" || !Number.isInteger(stock) || stock < 0)) {
         return res.status(400).json({ message: "El stock es obligatorio y debe ser un número entero no negativo" });
     }
 
     // validar activo
-    if (typeof activo !== "boolean") {
+    if (activo !== undefined && typeof activo !== "boolean") {
         return res.status(400).json({ message: "El campo 'activo' es obligatorio y debe ser un valor booleano" });
     }
 
+    // validar especificaciones (opcional)
+    if (especificaciones !== undefined && (especificaciones === null || typeof especificaciones !== "object" || Array.isArray(especificaciones))) {
+        return res.status(400).json({ message: "Las especificaciones deben ser un objeto válido" });
+    }
     producto.sku = sku || producto.sku;
     producto.nombre = nombre || producto.nombre;
     producto.categoria = categoria || producto.categoria;
