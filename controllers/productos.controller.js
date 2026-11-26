@@ -60,6 +60,11 @@ export const createProducto = (req, res) => {
         return res.status(400).json({ message: "El campo 'activo' es obligatorio y debe ser un valor booleano" });
     }
 
+    const existeSKU = productos.some((producto) => producto.sku === sku);
+    if (existeSKU) {
+        return res.status(409).json({ message: "El SKU ya existe" });
+    }
+
     const nuevoProducto = {
         id: productos.length + 1,
         sku,
@@ -88,6 +93,36 @@ export const updateProducto = (req, res) => {
 
     if (!producto) {
         return res.status(404).json({ message: "Producto no encontrado" });
+    }
+
+    // validar SKU
+    if (typeof sku !== "string" || sku.trim() === "") {
+        return res.status(400).json({ message: "El SKU es obligatorio" });
+    }
+
+    // validar nombre
+    if (typeof nombre !== "string" || nombre.trim() === "") {
+        return res.status(400).json({ message: "El nombre es obligatorio" });
+    }
+
+    // validar categoria
+    if (typeof categoria !== "string" || categoria.trim() === "") {
+        return res.status(400).json({ message: "La categoría es obligatoria" });
+    }
+
+    // validar precio
+    if (typeof precio !== "number" || !Number.isFinite(precio) || precio <= 0) {
+        return res.status(400).json({ message: "El precio es obligatorio y debe ser un número positivo" });
+    }
+
+    // validar stock
+    if (typeof stock !== "number" || !Number.isInteger(stock) || stock < 0) {
+        return res.status(400).json({ message: "El stock es obligatorio y debe ser un número entero no negativo" });
+    }
+
+    // validar activo
+    if (typeof activo !== "boolean") {
+        return res.status(400).json({ message: "El campo 'activo' es obligatorio y debe ser un valor booleano" });
     }
 
     producto.sku = sku || producto.sku;
