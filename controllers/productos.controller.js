@@ -8,7 +8,15 @@ export const getProductos = (req, res) => {
 //Get product by id
 export const getProductoById = (req, res) => {
     const { id } = req.params;
-    const producto = productos.find((p) => p.id === parseInt(id));
+
+    // Validar que el id sea un número entero positivo
+    const productoId = Number(id);
+
+    if (!Number.isInteger(productoId) || productoId <= 0) {
+        return res.status(400).json({ message: "El ID debe ser un número entero positivo" });
+    }
+
+    const producto = productos.find((p) => p.id === productoId);
 
     if (!producto) {
         return res.status(404).json({ message: "Producto no encontrado" });
