@@ -31,17 +31,17 @@ export const createProducto = (req, res) => {
     } = req.body;
 
     // validar SKU
-    if (!sku || sku.trim() === "") {
+    if (typeof sku !== "string" || sku.trim() === "") {
         return res.status(400).json({ message: "El SKU es obligatorio" });
     }
 
     // validar nombre
-    if (!nombre || nombre.trim() === "") {
+    if (typeof nombre !== "string" || nombre.trim() === "") {
         return res.status(400).json({ message: "El nombre es obligatorio" });
     }
 
     // validar categoria
-    if (!categoria || categoria.trim() === "") {
+    if (typeof categoria !== "string" || categoria.trim() === "") {
         return res.status(400).json({ message: "La categoría es obligatoria" });
     }
 
@@ -51,7 +51,7 @@ export const createProducto = (req, res) => {
     }
 
     // validar stock
-    if (!Number.isInteger(stock) || stock < 0) {
+    if (typeof stock !== "number" || !Number.isInteger(stock) || stock < 0) {
         return res.status(400).json({ message: "El stock es obligatorio y debe ser un número entero no negativo" });
     }
 
